@@ -1,5 +1,37 @@
 import { prisma } from './prisma';
-import { SessionState } from '@/types';
+import type { AgentMode } from '../../../types';
+
+interface HintLevel {
+  level: number;
+  text: string;
+}
+
+interface SessionState {
+  id: string;
+  userId: string;
+  problemId: string;
+  problem: {
+    id: string;
+    title: string;
+    description: string;
+    difficulty: number;
+    hints: HintLevel[];
+  };
+  messages: {
+    id: string;
+    role: 'user' | 'assistant';
+    content: string;
+    createdAt: Date;
+  }[];
+  hintsUsed: number;
+  consecutiveWrongAttempts: number;
+  currentMode: AgentMode;
+  timeStuck: number;
+  startedAt: Date;
+  lastActivityAt: Date;
+}
+
+export type { SessionState };
 
 export async function getSessionState(
   sessionId: string,
@@ -33,9 +65,9 @@ export async function getSessionState(
       title: session.problem.title,
       description: session.problem.description,
       difficulty: session.problem.difficulty,
-      hints: session.problem.hints as any,
+      hints: (session.problem.hints as unknown) as HintLevel[],
     },
-    messages: session.messages.map((msg) => ({
+    messages: session.messages.map((msg: { id: string; role: string; content: string; createdAt: Date }) => ({
       id: msg.id,
       role: msg.role as 'user' | 'assistant',
       content: msg.content,
@@ -43,7 +75,7 @@ export async function getSessionState(
     })),
     hintsUsed: session.hintsUsed,
     consecutiveWrongAttempts: session.consecutiveWrongAttempts,
-    currentMode: session.currentMode as any,
+    currentMode: session.currentMode as AgentMode,
     timeStuck,
     startedAt: session.startedAt,
     lastActivityAt: session.lastActivityAt,
@@ -63,14 +95,14 @@ export async function addMessage(
   sessionId: string,
   role: 'user' | 'assistant',
   content: string,
-  metadata?: any
+  metadata?: object
 ) {
   await prisma.message.create({
     data: {
       sessionId,
       role,
       content,
-      metadata,
+      metadata: metadata ?? undefined,
     },
   });
 

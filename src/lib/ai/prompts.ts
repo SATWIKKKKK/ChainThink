@@ -1,4 +1,4 @@
-import { AIContext } from '@/types';
+import type { AIContext } from './orchestration';
 
 export function buildSocraticPrompt(context: AIContext): string {
   return `You are ChainThink, an AI tutor specializing in teaching Dynamic Programming through Socratic questioning.
@@ -59,7 +59,7 @@ Break down the current problem into the SMALLEST possible sub-problem that the u
 ${context.problem}
 
 ## Where They're Stuck
-${context.conversationHistory.slice(-3).map(m => `${m.role}: ${m.content}`).join('\n')}
+${context.conversationHistory.slice(-3).map((m: { role: string; content: string }) => `${m.role}: ${m.content}`).join('\n')}
 
 ## User's Latest Message
 ${context.userMessage}
@@ -96,7 +96,7 @@ Respond by validating their reasoning. If it's sound, acknowledge and ask next q
 }
 
 export function buildHintPrompt(context: AIContext, level: number): string {
-  const hintGuidelines = {
+  const hintGuidelines: Record<number, string> = {
     1: `Level 1 - Nudge (Directional)
 Give a high-level direction without specifics. Point them toward the right area to think about.
 Example: "Start by thinking about the simplest case—what if there's only one step?"`,
@@ -125,7 +125,7 @@ Now you fill in the recursive case."`,
 ${context.problem}
 
 ## Hint Level Guidelines
-${hintGuidelines[level as keyof typeof hintGuidelines]}
+${hintGuidelines[level] || hintGuidelines[2]}
 
 ## User's Progress So Far
 ${formatConversationHistory(context.conversationHistory.slice(-5))}
