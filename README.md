@@ -1,33 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChainThink
+
+Chat with multiple AI models in one place. Access GPT-4, Claude, Gemini, Llama, and more through OpenRouter.
+
+## Features
+
+- 🤖 **Multiple AI Models** - Switch between GPT-4, Claude, Gemini, Llama, Mistral, and more
+- 💬 **Chat History** - All conversations saved and organized
+- 🎨 **Dark Theme** - Beautiful Vercel-inspired dark UI
+- 🔐 **Google Auth** - Secure authentication with Google
+- ⚡ **Fast Streaming** - Real-time streaming responses
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with Turbopack
+- **Database**: PostgreSQL (Supabase)
+- **ORM**: Prisma 7
+- **Auth**: NextAuth.js v5
+- **AI**: OpenRouter API
+- **Styling**: Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up environment variables (see `.env.example`)
+4. Push database schema: `npx prisma db push`
+5. Run development server: `npm run dev`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Environment Variables
+
+```env
+DATABASE_URL="your-postgresql-url"
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+OPENROUTER_API_KEY="your-openrouter-api-key"
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 

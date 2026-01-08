@@ -41,15 +41,15 @@ model Session {
 }
 
 model User {
-  id            String          @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?         @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  problemSessions ProblemSession[]
-  createdAt     DateTime        @default(now())
+  conversations Conversation[]
+  createdAt     DateTime       @default(now())
 }
 
 model VerificationToken {
@@ -60,47 +60,27 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Problem {
-  id          String           @id @default(cuid())
-  title       String
-  description String           @db.Text
-  difficulty  Int              // 1-5
-  topic       String
-  orderIndex  Int              @default(0)
-  hints       Json             // Array of hint objects
-  solution    Json             // Hidden solution structure
-  sessions    ProblemSession[]
-  createdAt   DateTime         @default(now())
-}
+// Chat conversation
+model Conversation {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String    @default("New Chat")
+  model     String    @default("openai/gpt-3.5-turbo") // OpenRouter model ID
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-model ProblemSession {
-  id                       String    @id @default(cuid())
-  userId                   String
-  user                     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  problemId                String
-  problem                  Problem   @relation(fields: [problemId], references: [id])
-  messages                 Message[]
-  hintsUsed                Int       @default(0)
-  consecutiveWrongAttempts Int       @default(0)
-  currentMode              String    @default("socratic")
-  completed                Boolean   @default(false)
-  qualityScore             Float?
-  startedAt                DateTime  @default(now())
-  lastActivityAt           DateTime  @default(now())
-  completedAt              DateTime?
-  timeSpentSeconds         Int       @default(0)
-
-  @@index([userId, problemId])
+  @@index([userId])
 }
 
 model Message {
-  id        String         @id @default(cuid())
-  sessionId String
-  session   ProblemSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  role      String         // "user" | "assistant"
-  content   String         @db.Text
-  metadata  Json?          // For storing hint level, mode, etc.
-  createdAt DateTime       @default(now())
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String       // "user" | "assistant" | "system"
+  content        String       @db.Text
+  createdAt      DateTime     @default(now())
 
-  @@index([sessionId])
+  @@index([conversationId])
 }

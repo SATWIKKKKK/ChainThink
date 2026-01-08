@@ -16,7 +16,7 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <Button
-            onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+            onClick={() => signIn('google', { callbackUrl: '/chat' })}
             className="w-full"
             size="lg"
           >

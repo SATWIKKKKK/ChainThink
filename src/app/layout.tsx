@@ -6,8 +6,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'ChainThink - Learn to Think, Not Just Answer',
-  description: 'AI tutor that teaches problem-solving through Socratic questioning',
+  title: 'ChainThink - AI Chat with Multiple Models',
+  description: 'Chat with GPT-4, Claude, Gemini, Llama and more in one place',
 };
 
 export default function RootLayout({
