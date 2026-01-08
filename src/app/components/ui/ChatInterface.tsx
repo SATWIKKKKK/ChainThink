@@ -163,22 +163,22 @@ export function ChatInterface({ sessionId, initialMessages = [] }: ChatInterface
                 }`}
               >
                 {message.role === 'assistant' && (
-                  <Avatar className="h-8 w-8 bg-primary">
-                    <AvatarFallback className="text-primary-foreground">CT</AvatarFallback>
+                  <Avatar className="h-8 w-8 bg-white">
+                    <AvatarFallback className="text-black font-semibold text-xs">CT</AvatarFallback>
                   </Avatar>
                 )}
                 <div
                   className={`rounded-lg px-4 py-2 max-w-[80%] ${
                     message.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted'
+                      ? 'bg-white text-black'
+                      : 'bg-secondary border border-border'
                   }`}
                 >
                   <p className="whitespace-pre-wrap text-sm">{message.content}</p>
                 </div>
                 {message.role === 'user' && (
-                  <Avatar className="h-8 w-8 bg-secondary">
-                    <AvatarFallback>You</AvatarFallback>
+                  <Avatar className="h-8 w-8 bg-muted">
+                    <AvatarFallback className="text-muted-foreground text-xs">You</AvatarFallback>
                   </Avatar>
                 )}
               </div>

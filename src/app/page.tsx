@@ -4,7 +4,7 @@ import { Brain, Target, TrendingUp } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-muted">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center space-y-6 max-w-3xl mx-auto">
@@ -28,8 +28,8 @@ export default function LandingPage() {
         {/* Features */}
         <div className="grid md:grid-cols-3 gap-8 mt-24">
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-              <Brain className="h-6 w-6 text-primary" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20">
+              <Brain className="h-6 w-6 text-white" />
             </div>
             <h3 className="font-semibold text-lg">Socratic Method</h3>
             <p className="text-sm text-muted-foreground">
@@ -38,8 +38,8 @@ export default function LandingPage() {
           </div>
 
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-              <Target className="h-6 w-6 text-primary" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20">
+              <Target className="h-6 w-6 text-white" />
             </div>
             <h3 className="font-semibold text-lg">Adaptive Guidance</h3>
             <p className="text-sm text-muted-foreground">
@@ -48,8 +48,8 @@ export default function LandingPage() {
           </div>
 
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-              <TrendingUp className="h-6 w-6 text-primary" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20">
+              <TrendingUp className="h-6 w-6 text-white" />
             </div>
             <h3 className="font-semibold text-lg">Build Real Skills</h3>
             <p className="text-sm text-muted-foreground">

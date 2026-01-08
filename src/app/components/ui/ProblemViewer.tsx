@@ -16,11 +16,11 @@ interface ProblemViewerProps {
 }
 
 const difficultyColors = {
-  1: 'bg-green-500',
-  2: 'bg-green-600',
-  3: 'bg-yellow-500',
-  4: 'bg-orange-500',
-  5: 'bg-red-500',
+  1: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  2: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  3: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+  4: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  5: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
 const difficultyLabels = {
@@ -38,9 +38,10 @@ export function ProblemViewer({ problem }: ProblemViewerProps) {
         <div className="flex items-start justify-between">
           <CardTitle className="text-2xl">{problem.title}</CardTitle>
           <Badge
+            variant="outline"
             className={`${
               difficultyColors[problem.difficulty as keyof typeof difficultyColors]
-            } text-white`}
+            }`}
           >
             {difficultyLabels[problem.difficulty as keyof typeof difficultyLabels]}
           </Badge>

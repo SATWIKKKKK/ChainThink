@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted/50">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="w-100">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Welcome to ChainThink</CardTitle>

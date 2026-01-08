@@ -84,15 +84,15 @@ export default async function DashboardPage() {
             const inProgress = inProgressSessions.find((s: Session) => s.problemId === problem.id);
 
             return (
-              <Card key={problem.id} className={isCompleted ? 'border-green-500' : ''}>
+              <Card key={problem.id} className={isCompleted ? 'border-emerald-500/50' : ''}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         {isCompleted ? (
-                          <CheckCircle2 className="h-5 w-5 text-green-500" />
+                          <CheckCircle2 className="h-5 w-5 text-emerald-400" />
                         ) : inProgress ? (
-                          <Clock className="h-5 w-5 text-yellow-500" />
+                          <Clock className="h-5 w-5 text-amber-400" />
                         ) : (
                           <Circle className="h-5 w-5 text-muted-foreground" />
                         )}
@@ -102,10 +102,14 @@ export default async function DashboardPage() {
                         {problem.description.split('\n')[0]}
                       </CardDescription>
                     </div>
-                    <Badge variant={
-                      problem.difficulty <= 2 ? 'secondary' :
-                      problem.difficulty <= 3 ? 'default' : 'destructive'
-                    }>
+                    <Badge 
+                      variant="outline"
+                      className={
+                        problem.difficulty <= 2 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                        problem.difficulty <= 3 ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : 
+                        'bg-red-500/20 text-red-400 border-red-500/30'
+                      }
+                    >
                       Difficulty {problem.difficulty}
                     </Badge>
                   </div>

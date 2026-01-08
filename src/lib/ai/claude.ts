@@ -1,7 +1,8 @@
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
+  apiKey: process.env.OPENROUTER_API_KEY!,
+  baseURL: process.env.OPENROUTER_BASE_URL || undefined,
 });
 
 export async function streamClaudeResponse(
@@ -14,7 +15,7 @@ export async function streamClaudeResponse(
     async start(controller) {
       try {
         const response = await anthropic.messages.stream({
-          model: 'claude-sonnet-4-20250514',
+          model: 'anthropic/claude-sonnet-4-20250514', // OpenRouter format
           max_tokens: 1024,
           system: systemPrompt,
           messages: messages.map((m) => ({
